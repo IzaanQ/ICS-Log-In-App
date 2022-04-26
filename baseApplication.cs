@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace ConsoleApplication1
 {
@@ -23,6 +24,9 @@ namespace ConsoleApplication1
                 Console.WriteLine("");
                 Console.WriteLine("Welcome to Blabbr! Please create a username, then press enter!");
                 newUserName = Convert.ToString(Console.ReadLine());
+                Console.WriteLine("");
+                Console.WriteLine("Please create a password, then press enter.");
+                newPassWord = Convert.ToString(Console.ReadLine());
 
             }
 
@@ -34,6 +38,12 @@ namespace ConsoleApplication1
                 Console.WriteLine("Please enter your password below, then press enter");
                 passWord = Convert.ToString(Console.ReadLine());
             }
+
+            TextWriter tw = new StreamWriter("C:/text/text.txt", true);
+            tw.WriteLine("Username1:" + newUserName);
+            tw.Close();
+            Console.WriteLine("Success");
+
 
             Console.ReadLine();
 
