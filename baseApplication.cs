@@ -40,9 +40,21 @@ namespace ConsoleApplication1
             }
 
             TextWriter tw = new StreamWriter("C:/text/text.txt", true);
-            tw.WriteLine("Username1:" + newUserName);
+            tw.WriteLine(newUserName + newPassWord);
+            tw.WriteLine(userName);
             tw.Close();
-            Console.WriteLine("Success");
+
+
+
+            int counter = 0; 
+            foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
+            {
+                System.Console.WriteLine(line);
+                counter++;
+            }
+  
+
+
 
 
             Console.ReadLine();
