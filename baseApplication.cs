@@ -71,7 +71,6 @@ namespace ConsoleApplication1
 
             if (check == array[counter])
             {
-                Console.WriteLine("Alhamdulillah");
             }
   
 
