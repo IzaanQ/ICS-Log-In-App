@@ -58,12 +58,13 @@ namespace ConsoleApplication1
             int counter = 0;
             foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
             {
-                counter++;
-
                 foreach (char ting in line)
                 {
-                    Console.WriteLine(ting);
+                    char theTing = ting;
+                    array[counter] = ting;
                 }
+
+                counter++;
 
             }
 
