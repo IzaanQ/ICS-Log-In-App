@@ -44,20 +44,17 @@ namespace ConsoleApplication1
             tw.WriteLine(userName);
             tw.Close();
 
-            char[] array = new char[9000];
+            char[] array = new char[0];
 
-            int counter = 0; 
+            int counter = 0;
             foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
             {
                 System.Console.WriteLine(line);
                 counter++;
-                for (int i = 0; i < line.Length; i++)
-                {
-                array[i] = line[i];
-                }
+                
             }
 
-            string[] checkArray = new string[9000];
+            string[] checkArray = new string[0];
             string check = newUserName + newPassWord;
 
             for (int i = 0; i < array.Length; i++)
@@ -65,15 +62,6 @@ namespace ConsoleApplication1
                 Console.WriteLine(array[i]);
             }
 
-            
-            
-            Console.WriteLine(array);
-
-            if (check == array[counter])
-            {
-                
-            }
-  
 
 
 
