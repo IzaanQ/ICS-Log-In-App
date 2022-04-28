@@ -40,40 +40,46 @@ namespace ConsoleApplication1
             }
 
             TextWriter tw = new StreamWriter("C:/text/text.txt", true);
-            tw.WriteLine(newUserName + newPassWord);
-            tw.WriteLine(userName);
-            tw.Close();
 
-            char[] array = new char[9000];
-
-            int counter = 0; 
-            foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
+            if (userState == 'N')
             {
-                System.Console.WriteLine(line);
-                counter++;
-                for (int i = 0; i < line.Length; i++)
-                {
-                array[i] = line[i];
-                }
+                tw.WriteLine(newUserName + newPassWord);
+                tw.Close();
             }
 
-            string[] checkArray = new string[9000];
-            string check = newUserName + newPassWord;
+            if (userState == 'R')
+            {
+                tw.WriteLine(userName + passWord);
+                tw.Close();
+            }
+
+
+            char[] array = new char[0];
+            int counter = 0;
+            foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
+            {
+                counter++;
+
+                foreach (char ting in line)
+                {
+                    Console.WriteLine(ting);
+                }
+
+            }
+
+
+
+
+
+
+
+         
 
             for (int i = 0; i < array.Length; i++)
             {
                 Console.WriteLine(array[i]);
             }
 
-            
-            
-            Console.WriteLine(array);
-
-            if (check == array[counter])
-            {
-                Console.WriteLine("Alhamdulillah");
-            }
-  
 
 
 
