@@ -10,6 +10,9 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            string active = "";
+            string iden = "";
+            string ret = "";
             Console.WriteLine("Welcome to blabbr vers. 1.0");
             Console.WriteLine("Are you a returning user (R) or a new user (N)");
             Console.WriteLine("Please write your answer below, then press enter");
@@ -27,7 +30,7 @@ namespace ConsoleApplication1
                 Console.WriteLine("");
                 Console.WriteLine("Please create a password, then press enter.");
                 newPassWord = Convert.ToString(Console.ReadLine());
-
+                iden = (newUserName + newPassWord);
             }
 
             if (userState == 'R')
@@ -37,6 +40,7 @@ namespace ConsoleApplication1
                 Console.WriteLine("");
                 Console.WriteLine("Please enter your password below, then press enter");
                 passWord = Convert.ToString(Console.ReadLine());
+                ret = (userName + passWord);
             }
 
             TextWriter tw = new StreamWriter("C:/text/text.txt", true);
@@ -49,7 +53,7 @@ namespace ConsoleApplication1
 
             if (userState == 'R')
             {
-                tw.WriteLine(userName + passWord);
+                tw.WriteLine("");
                 tw.Close();
             }
 
@@ -59,33 +63,39 @@ namespace ConsoleApplication1
             foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
             {
                 counter++;
-
-                foreach (char ting in line)
-                {
-                    Console.WriteLine(ting);
-                }
-
+                active = (line);
             }
 
-
-
-
-
-
-
-         
-
-            for (int i = 0; i < array.Length; i++)
+            if (userState == 'N') {
+            if (active == iden)
             {
-                Console.WriteLine(array[i]);
+                Console.WriteLine("");
+                Console.WriteLine("You have successfully authenticated an account with Blabbr!");
+                Console.WriteLine("");
+                Console.WriteLine("Username: " + newUserName);
+                Console.WriteLine("Password: " + newPassWord);
+            }
+            }
+            
+            if (userState == 'R')
+            {
+                int altcounter = 0;
+                foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
+                {
+                    altcounter++;
+                    if (ret == line)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Welcome back to blabbr!");
+                    }
+                }
             }
 
 
+                Console.ReadLine();
 
-
-
-            Console.ReadLine();
-
+            }
         }
     }
-}
+
+
