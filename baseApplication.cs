@@ -13,6 +13,7 @@ namespace ConsoleApplication1
             string active = "";
             string iden = "";
             string ret = "";
+            bool returningCheck = false;
             Console.WriteLine("Welcome to blabbr vers. 1.0");
             Console.WriteLine("Are you a returning user (R) or a new user (N)");
             Console.WriteLine("Please write your answer below, then press enter");
@@ -48,14 +49,9 @@ namespace ConsoleApplication1
             if (userState == 'N')
             {
                 tw.WriteLine(newUserName + newPassWord);
-                tw.Close();
             }
 
-            if (userState == 'R')
-            {
-                tw.WriteLine("");
-                tw.Close();
-            }
+            tw.Close();
 
 
             char[] array = new char[0];
@@ -85,11 +81,24 @@ namespace ConsoleApplication1
                     altcounter++;
                     if (ret == line)
                     {
-                        Console.WriteLine("");
-                        Console.WriteLine("Welcome back to blabbr!");
+                        returningCheck = true;
                     }
                 }
+
+                if (returningCheck == true)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("You have successfully logged in to blabbr!");
+                }
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Unfortunately, we could not retrieve your account.");
+                }
+
             }
+            
+
 
 
                 Console.ReadLine();
