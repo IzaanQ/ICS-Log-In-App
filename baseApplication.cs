@@ -30,8 +30,15 @@ namespace ConsoleApplication1
                 newUserName = Convert.ToString(Console.ReadLine());
                 Console.WriteLine("");
                 Console.WriteLine("Please create a password, then press enter.");
+                ConsoleColor origBG = Console.BackgroundColor; // Store original values
+                ConsoleColor origFG = Console.ForegroundColor;
+                Console.BackgroundColor = ConsoleColor.White; // Set the block colour (could be anything)
+                Console.ForegroundColor = ConsoleColor.White;
                 newPassWord = Convert.ToString(Console.ReadLine());
+                Console.BackgroundColor = origBG; // revert back to original
+                Console.ForegroundColor = origFG;
                 iden = (newUserName + newPassWord);
+
             }
 
             if (userState == 'R')
