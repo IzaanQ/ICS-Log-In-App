@@ -1,24 +1,29 @@
 using Godot;
 using System;
 
-public class ExitButton2 : Button
+public class ExitButton1 : Button
 {
 	private Button exitbutton1;
-	private Panel SignUpPanel;
+	private Panel LogPanel;
 	private Panel MenuPanel;
 
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
-		SignUpPanel = GetNode<Panel>("/root/Control/Background/SignUpPanel");
+		LogPanel = GetNode<Panel>("/root/Control/Background/LogPanel");
 		MenuPanel = GetNode<Panel>("/root/Control/Background/MenuPanel");
-		exitbutton1 = GetNode<Button>("ExitButton1");
+		exitbutton1 = GetNode<Button>("/root/Control/Background/LogPanel/ExitButton1");
 	}
-
-	private void OnExitButton2Pressed()
+	
+	// on exit button pressed.
+	private void OnExitButton1Pressed()
 	{
-		SignUpPanel.Visible = false;
+		// exits to the menu panel from the log panel.
+		LogPanel.Visible = false;
 		MenuPanel.Visible = true;
 	}
-
+	
 }
+
+
+
