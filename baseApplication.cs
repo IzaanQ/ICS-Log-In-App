@@ -43,11 +43,18 @@ namespace ConsoleApplication1
 
             if (userState == 'R')
             {
+                Console.WriteLine("");
                 Console.WriteLine("Please enter your username below, then press enter");
                 userName = Convert.ToString(Console.ReadLine());
                 Console.WriteLine("");
-                Console.WriteLine("Please enter your password below, then press enter");
+                Console.WriteLine("Please enter your password, then press enter.");
+                ConsoleColor origBG = Console.BackgroundColor; // Store original values
+                ConsoleColor origFG = Console.ForegroundColor;
+                Console.BackgroundColor = ConsoleColor.White; // Set the block colour (could be anything)
+                Console.ForegroundColor = ConsoleColor.White;
                 passWord = Convert.ToString(Console.ReadLine());
+                Console.BackgroundColor = origBG; // revert back to original
+                Console.ForegroundColor = origFG;
                 ret = (userName + passWord);
             }
 
