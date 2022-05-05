@@ -10,20 +10,21 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            string active = "";
-            string iden = "";
-            string ret = "";
-            bool returningCheck = false;
-            Console.WriteLine("Welcome to blabbr vers. 1.0");
-            Console.WriteLine("Are you a returning user (R) or a new user (N)");
-            Console.WriteLine("Please write your answer below, then press enter");
-            char userState = Convert.ToChar(Console.ReadLine());
-            string newUserName = "";
-            string newPassWord = "";
-            string userName = "";
-            string passWord = "";
+            string active = ""; //intialise active string (empty for the time being)
+            string iden = ""; //intialise identity string (empty for the time being)
+            string ret = ""; // initialise return string (empty for the time being)
+            bool returningCheck = false; //default setting of returning check (false for the time being)
+            Console.WriteLine("Welcome to blabbr vers. 1.0"); //Welcome user to the application
+            Console.WriteLine("Are you a returning user (R) or a new user (N)"); //Ask the user if they are a new or returning
+            Console.WriteLine("Please write your answer below, then press enter"); // Ask the user to input their answer and press enter
+            char userState = Convert.ToChar(Console.ReadLine()); //declare the users state as the users answer (R) or (N)
+            userState = char.ToLower(userState);
+            string newUserName = ""; //initialise new user username string (false for the time being)
+            string newPassWord = ""; //initialise new user password string (false for the time being)
+            string userName = ""; //initialise existing user username
+            string passWord = ""; //initialise existing user password
 
-            if (userState == 'N')
+            if (userState == 'n') //if the current user is a new user, do the following code in the block
             {
                 Console.WriteLine("");
                 Console.WriteLine("Welcome to Blabbr! Please create a username, then press enter!");
@@ -41,7 +42,7 @@ namespace ConsoleApplication1
 
             }
 
-            if (userState == 'R')
+            if (userState == 'r')
             {
                 Console.WriteLine("");
                 Console.WriteLine("Please enter your username below, then press enter");
@@ -60,7 +61,7 @@ namespace ConsoleApplication1
 
             TextWriter tw = new StreamWriter("C:/text/text.txt", true);
 
-            if (userState == 'N')
+            if (userState == 'n')
             {
                 tw.WriteLine(newUserName + newPassWord);
             }
@@ -76,18 +77,25 @@ namespace ConsoleApplication1
                 active = (line);
             }
 
-            if (userState == 'N') {
+            if (userState == 'n') {
             if (active == iden)
             {
                 Console.WriteLine("");
                 Console.WriteLine("You have successfully authenticated an account with Blabbr!");
                 Console.WriteLine("");
                 Console.WriteLine("Username: " + newUserName);
-                Console.WriteLine("Password: " + newPassWord);
+                ConsoleColor origBG = Console.BackgroundColor; // Store original values
+                Console.WriteLine("Password: ");
+                ConsoleColor origFG = Console.ForegroundColor;
+                Console.BackgroundColor = ConsoleColor.White; // Set the block colour (could be anything)
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Pas: " + newPassWord);
+                Console.BackgroundColor = origBG; // revert back to original
+                Console.ForegroundColor = origFG;
             }
             }
             
-            if (userState == 'R')
+            if (userState == 'r')
             {
                 int altcounter = 0;
                 foreach (string line in System.IO.File.ReadLines(@"C:/text/text.txt"))
@@ -111,6 +119,23 @@ namespace ConsoleApplication1
                 }
 
             }
+
+            if (userState == 'n')
+            {
+                Console.WriteLine("Type 'password', and press enter, if you would like to see your password");
+                Console.WriteLine("");
+                string userAnswer = Convert.ToString(Console.ReadLine());
+                if (userAnswer == "password")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Password: " + newPassWord);
+                }
+                else {
+                Console.WriteLine("error");
+                }
+
+            }
+
             
 
 
