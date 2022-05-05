@@ -1,31 +1,77 @@
 using Godot;
 using System;
 
-public class ChatLine : LineEdit
+public class ChatPanel : Panel
 {
-	private LineEdit Chatline;
+	private Panel Chat;
 	private TextEdit ChatBox;
-	private string ChatInput = "";
+	private LineEdit ChatLine;
+	private Button SignOut;
+	private LineEdit IpAddress;
+	private Button JoinRoom;
+	private Button HostRoom;
+	private Panel MenuPanel;
 	private LineEdit UsernameInput;
+	string username = "";
+	string message = "";
 	
+
+	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Chatline = GetNode<LineEdit>("/root/Control/Background/ChatPanel/ChatLine");
+		Chat = GetNode<Panel>("/root/Control/Background/ChatPanel");
 		ChatBox = GetNode<TextEdit>("/root/Control/Background/ChatPanel/ChatBox");
-		UsernameInput = GetNode<LineEdit>("/root/Control/Background/SignUpPanel/UsernameInput");
+		ChatLine = GetNode<LineEdit>("/root/Control/Background/ChatPanel/ChatLine");
+		SignOut = GetNode<Button>("/root/Control/Background/ChatPanel/SignOutButton");
+		IpAddress = GetNode<LineEdit>("/root/Control/Background/ChatPanel/IpAddress");
+		JoinRoom = GetNode<Button>("/root/Control/Background/ChatPanel/JoinRoom");
+		HostRoom = GetNode<Button>("/root/Control/Background/ChatPanel/HostRoom");
+		MenuPanel = GetNode<Panel>("/root/Control/Background/MenuPanel");
+		UsernameInput = GetNode<LineEdit>("/root/Control/Background/LogPanel/UsernameInput");
+		
 	}
 	
-	// When input is typed and entered..
-	private void _on_ChatLine_text_entered(String new_text)
+	public void _on_JoinRoom_button_up()
 	{
-		// store the input in a string and then display it and the username on the chatbox. Clear the chat line after.
-		ChatInput = Chatline.Text;
-		ChatBox.Text += UsernameInput.Text + ": " + ChatInput + "\n";
-		Chatline.Clear();
-		ChatBox.ScrollVertical = 999999;
+		var ip = IpAddress.Text;
+		var client = new NetworkedMultiplayerENet();
+		var result = client.CreateClient(ip, 4321);
+		GetTree().NetworkPeer = client;
+		
 	}
+	
+	public void _on_HostRoom_button_up()
+	{	
+		var host = new NetworkedMultiplayerENet();
+		host.CreateServer(4321, 32);
+		GetTree().NetworkPeer = host;
+		
+
+	}	
+	
+	public void _on_ChatLine_text_entered(String message)
+	{
+		message = ChatLine.Text;
+		username = UsernameInput.Text;
+		Rpc("ReceiveMessage", username, message);
+		ChatLine.Text = "";
+		ChatBox.Text += username + ": " + message + "\n";
+		ChatBox.ScrollVertical = 99999999999;
+	}
+	
+	private void _on_SignOutButton_button_up()
+	{
+		Chat.Visible = false;
+		MenuPanel.Visible = true;
+	}
+	
 	
 }
+
+
+
+
+
 
 
 
