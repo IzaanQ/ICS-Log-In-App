@@ -143,7 +143,7 @@ namespace ConsoleApplication1
 
 
 
-                Console.ReadLine(); //run written code
+                Console.ReadLine(); //run written codes
 
             }
         }
